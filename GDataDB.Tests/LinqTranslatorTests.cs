@@ -8,7 +8,7 @@ namespace GDataDB.Tests {
 	public class LinqTranslatorTests {
 		private IQueryable<Entity> q;
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureSetup() {
 			var t = new DummyTable();
 			q = new Query<Entity>(new GDataDBQueryProvider<Entity>(t));
@@ -87,7 +87,7 @@ namespace GDataDB.Tests {
 		}
 
 		[Test]
-		[ExpectedException(typeof (NotSupportedException))]
+		//[ExpectedException(typeof (NotSupportedException))]
 		public void OrderBy_With_comparer_is_not_supported() {
 			var iq = (Query<Entity>) q.OrderBy(e => e.Quantity, new DummyComparer<int>());
 			var sq = iq.ToQuery();
